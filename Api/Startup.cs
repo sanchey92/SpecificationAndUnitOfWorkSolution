@@ -1,4 +1,7 @@
 using Api.Extensions;
+using Api.Helpers;
+using Core.Interfaces;
+using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +22,8 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddConnectionToDb(Configuration);
+            services.AddAutoMapper(typeof(MappingProfiles));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllers();
         }
 
